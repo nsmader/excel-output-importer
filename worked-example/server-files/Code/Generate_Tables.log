@@ -1,0 +1,544 @@
+1                                                          The SAS System                          12:38 Wednesday, December 5, 2012
+
+NOTE: Copyright (c) 2002-2008 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.2 (TS2M0) 
+      Licensed to UNIVERSITY OF CHICAGO - SFA T&R, Site 70080300.
+NOTE: This session is executing on the Linux 2.6.32.59-0.3-default (LIN X64) platform.
+
+
+
+You are running SAS 9. Some SAS 8 files will be automatically converted 
+by the V9 engine; others are incompatible.  Please see 
+http://support.sas.com/rnd/migration/planning/platform/64bit.html
+
+PROC MIGRATE will preserve current SAS file attributes and is 
+recommended for converting all your SAS libraries from any 
+SAS 8 release to SAS 9.  For details and examples, please see
+http://support.sas.com/rnd/migration/index.html
+
+
+This message is contained in the SAS news file, and is presented upon
+initialization.  Edit the file "news" in the "misc/base" directory to
+display site-specific news and information in the program log.
+The command line option "-nonews" will prevent this display.
+
+
+
+
+NOTE: SAS initialization used:
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+NOTE: AUTOEXEC processing beginning; file is /users/madern/autoexec.sas.
+
+NOTE: Libref QR was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /users/koepke/formats
+
+NOTE: AUTOEXEC processing completed.
+
+1          /*--------------------------------------------------------*/
+2          /*                                                        */
+3          /* EXAMPLE CODE FOR AUTOMATING TABLE GENERATION IN EXCEL  */
+4          /* Generate Descriptive Summary Tables and Export to csv  */
+5          /*                                                        */
+6          /*  Author: Nicholas Mader (nmader@chapinhall.org)        */
+7          /*                                                        */
+8          /*--------------------------------------------------------*/
+9          
+10         /*----------------------------------------------*/
+11         /* * * SET ENVIRONMENTAL AND RUN PARAMETERS * * */
+12         /*----------------------------------------------*/
+13         
+14         	%LET MyPath = /tmp/Excel_Seminar;
+15         	%LET PlayerList = dunna001 konep001 youkk001 ; /* */
+16         	%LET OutcomesList = AbOut_Bb AbOut_K AbOut_Hit AbOut_1B AbOut_2B AbOut_3B
+16       !  AbOut_Hr;
+17         
+18         /*------------------------------------------------------------------------
+18       ! */
+19         /* * * READ DATA, AND SUBSET TO ONLY THE PLAYERS WE ARE INTERESTED IN * *
+19       ! */
+20         /*------------------------------------------------------------------------
+20       ! */
+21         	
+22         	
+22       !  PROC IMPORT DATAFILE = "&MyPath./Data/Baseball Data for Excel
+22       ! Seminar.csv"
+23         				OUT = WORK.BaseballData
+24         				DBMS = CSV REPLACE;
+24       !                        
+25         		GETNAMES = YES;
+26         		DATAROW = 2;
+27         	RUN;
+
+2                                  The SAS System   12:38 Wednesday, December 5, 2012
+
+27       !      
+28          /**********************************************************************
+29          *   PRODUCT:   SAS
+30          *   VERSION:   9.2
+31          *   CREATOR:   External File Interface
+32          *   DATE:      05DEC12
+33          *   DESC:      Generated SAS Datastep Code
+34          *   TEMPLATE SOURCE:  (None Specified.)
+35          ***********************************************************************/
+36             data WORK.BASEBALLDATA                            ;
+37             %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+38             infile '/tmp/Excel_Seminar/Data/Baseball Data for Excel Seminar.csv'
+38       ! delimiter = ',' MISSOVER DSD lrecl=32767 firstobs=2 ;
+39                informat BatterId $10. ;
+40                informat AbOut_Out best32. ;
+41                informat AbOut_K best32. ;
+42                informat AbOut_Bb best32. ;
+43                informat AbOut_Hit best32. ;
+44                informat AbOut_1B best32. ;
+45                informat AbOut_2B best32. ;
+46                informat AbOut_3B best32. ;
+47                informat AbOut_Hr best32. ;
+48                informat Year best32. ;
+49                informat Month best32. ;
+50                informat Runner1BInd best32. ;
+51                informat Runner2BInd best32. ;
+52                informat Runner3BInd best32. ;
+53                format BatterId $10. ;
+54                format AbOut_Out best12. ;
+55                format AbOut_K best12. ;
+56                format AbOut_Bb best12. ;
+57                format AbOut_Hit best12. ;
+58                format AbOut_1B best12. ;
+59                format AbOut_2B best12. ;
+60                format AbOut_3B best12. ;
+61                format AbOut_Hr best12. ;
+62                format Year best12. ;
+63                format Month best12. ;
+64                format Runner1BInd best12. ;
+65                format Runner2BInd best12. ;
+66                format Runner3BInd best12. ;
+67             input
+68                         BatterId $
+69                         AbOut_Out
+70                         AbOut_K
+71                         AbOut_Bb
+72                         AbOut_Hit
+73                         AbOut_1B
+74                         AbOut_2B
+75                         AbOut_3B
+76                         AbOut_Hr
+77                         Year
+78                         Month
+79                         Runner1BInd
+80                         Runner2BInd
+81                         Runner3BInd
+82             ;
+83             if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection
+83       ! macro variable */
+84             run;
+
+NOTE: The infile '/tmp/Excel_Seminar/Data/Baseball Data for Excel Seminar.csv' is:
+      Filename=/tmp/Excel_Seminar/Data/Baseball Data for Excel Seminar.csv,
+      Owner Name=madern,Group Name=chapin,
+      Access Permission=rw-r--r--,
+      Last Modified=Mon Dec  3 23:17:45 2012,
+      File Size (bytes)=23087288
+
+NOTE: 576975 records were read from the infile '/tmp/Excel_Seminar/Data/Baseball 
+      Data for Excel Seminar.csv'.
+      The minimum record length was 39.
+      The maximum record length was 40.
+NOTE: The data set WORK.BASEBALLDATA has 576975 observations and 14 variables.
+3                                  The SAS System   12:38 Wednesday, December 5, 2012
+
+NOTE: DATA statement used (Total process time):
+      real time           0.83 seconds
+      cpu time            0.83 seconds
+      
+
+576975 rows created in WORK.BASEBALLDATA                         from 
+/tmp/Excel_Seminar/Data/Baseball Data for Excel Seminar.csv.
+  
+  
+  
+NOTE: WORK.BASEBALLDATA data set was successfully created.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           0.88 seconds
+      cpu time            0.89 seconds
+      
+
+85         	
+86         	%LET QuotedPlayers = %SYSFUNC(TRANWRD(%SYSFUNC(TRIM("&PlayerList.")),
+86       ! %STR( ), ", "));
+87         	
+88         	
+88       !  DATA BBDataSubset;
+89         		SET BaseballData (WHERE = ( (BatterId IN (&QuotedPlayers.)) &
+89       ! (Runner1BInd = 1 | Runner2BInd = 1 | Runner3BInd = 1) )); /*  */
+90         	RUN;
+
+NOTE: There were 2777 observations read from the data set WORK.BASEBALLDATA.
+      WHERE BatterId in ('dunna001', 'konep001', 'youkk001') and ((Runner1BInd=1) or 
+      (Runner2BInd=1) or (Runner3BInd=1));
+NOTE: The data set WORK.BBDATASUBSET has 2777 observations and 14 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.05 seconds
+      
+
+90       !      
+91         
+92         /*------------------------------------------------*/
+93         /* * * RUN THE DESCRIPTIVE SUMMARY AND OUTPUT * * */
+94         /*------------------------------------------------*/
+95         	
+96         	%MACRO RunAvg;
+97         		%LET i = 1;
+98         		%DO %UNTIL (%SCAN(&PlayerList., &i.) = );
+99         			%LET MyPlyr = %SCAN(&PlayerList, &i.);
+100        			%PUT Working on processing player: &MyPlyr.;
+101        			
+102        			PROC MEANS DATA = BBDataSubset (WHERE = (BatterId = "&MyPlyr."))
+102      ! NOPRINT;
+103        				VAR &OutcomesList.;
+104        				BY Year;
+105        				OUTPUT OUT = HitStats_ByYear_&MyPlyr. MEAN = &OutcomesList.;
+106        			RUN;
+107        			PROC EXPORT DATA = HitStats_ByYear_&MyPlyr. OUTFILE =
+107      ! "&MyPath/Output/HitStats_&MyPlyr._ByYear_SAS.csv" DBMS = CSV REPLACE;
+108        			RUN;
+109        			%LET i = %EVAL(&i. + 1);
+110        		%END;
+111        	%MEND;
+112        	%RunAvg;
+Working on processing player: dunna001
+
+NOTE: There were 954 observations read from the data set WORK.BBDATASUBSET.
+      WHERE BatterId='dunna001';
+NOTE: The data set WORK.HITSTATS_BYYEAR_DUNNA001 has 3 observations and 10 variables.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+113         /**********************************************************************
+114         *   PRODUCT:   SAS
+4                                  The SAS System   12:38 Wednesday, December 5, 2012
+
+115         *   VERSION:   9.2
+116         *   CREATOR:   External File Interface
+117         *   DATE:      05DEC12
+118         *   DESC:      Generated SAS Datastep Code
+119         *   TEMPLATE SOURCE:  (None Specified.)
+120         ***********************************************************************/
+121            data _null_;
+122            %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+123            %let _EFIREC_ = 0;     /* clear export record count macro variable */
+124            file '/tmp/Excel_Seminar/Output/HitStats_dunna001_ByYear_SAS.csv'
+124      ! delimiter=',' DSD DROPOVER lrecl=32767;
+125            if _n_ = 1 then        /* write column names or labels */
+126             do;
+127               put
+128                  "Year"
+129               ','
+130                  "_TYPE_"
+131               ','
+132                  "_FREQ_"
+133               ','
+134                  "AbOut_Bb"
+135               ','
+136                  "AbOut_K"
+137               ','
+138                  "AbOut_Hit"
+139               ','
+140                  "AbOut_1B"
+141               ','
+142                  "AbOut_2B"
+143               ','
+144                  "AbOut_3B"
+145               ','
+146                  "AbOut_Hr"
+147               ;
+148             end;
+149           set  HITSTATS_BYYEAR_DUNNA001   end=EFIEOD;
+150               format Year best12. ;
+151               format _TYPE_ best12. ;
+152               format _FREQ_ best12. ;
+153               format AbOut_Bb best12. ;
+154               format AbOut_K best12. ;
+155               format AbOut_Hit best12. ;
+156               format AbOut_1B best12. ;
+157               format AbOut_2B best12. ;
+158               format AbOut_3B best12. ;
+159               format AbOut_Hr best12. ;
+160             do;
+161               EFIOUT + 1;
+162               put Year @;
+163               put _TYPE_ @;
+164               put _FREQ_ @;
+165               put AbOut_Bb @;
+166               put AbOut_K @;
+167               put AbOut_Hit @;
+168               put AbOut_1B @;
+169               put AbOut_2B @;
+170               put AbOut_3B @;
+171               put AbOut_Hr ;
+172               ;
+173             end;
+174            if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection
+174      ! macro variable */
+175            if EFIEOD then call symputx('_EFIREC_',EFIOUT);
+176            run;
+
+NOTE: The file '/tmp/Excel_Seminar/Output/HitStats_dunna001_ByYear_SAS.csv' is:
+      Filename=/tmp/Excel_Seminar/Output/HitStats_dunna001_ByYear_SAS.csv,
+      Owner Name=madern,Group Name=chapin,
+      Access Permission=rw-rw----,
+      Last Modified=Wed Dec  5 12:38:43 2012
+
+NOTE: 4 records were written to the file 
+      '/tmp/Excel_Seminar/Output/HitStats_dunna001_ByYear_SAS.csv'.
+5                                  The SAS System   12:38 Wednesday, December 5, 2012
+
+      The minimum record length was 81.
+      The maximum record length was 90.
+NOTE: There were 3 observations read from the data set WORK.HITSTATS_BYYEAR_DUNNA001.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+3 records created in /tmp/Excel_Seminar/Output/HitStats_dunna001_ByYear_SAS.csv from 
+HITSTATS_BYYEAR_DUNNA001.
+  
+  
+NOTE: "/tmp/Excel_Seminar/Output/HitStats_dunna001_ByYear_SAS.csv" file was 
+      successfully created.
+NOTE: PROCEDURE EXPORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.03 seconds
+      
+
+Working on processing player: konep001
+
+NOTE: There were 987 observations read from the data set WORK.BBDATASUBSET.
+      WHERE BatterId='konep001';
+NOTE: The data set WORK.HITSTATS_BYYEAR_KONEP001 has 3 observations and 10 variables.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+177         /**********************************************************************
+178         *   PRODUCT:   SAS
+179         *   VERSION:   9.2
+180         *   CREATOR:   External File Interface
+181         *   DATE:      05DEC12
+182         *   DESC:      Generated SAS Datastep Code
+183         *   TEMPLATE SOURCE:  (None Specified.)
+184         ***********************************************************************/
+185            data _null_;
+186            %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+187            %let _EFIREC_ = 0;     /* clear export record count macro variable */
+188            file '/tmp/Excel_Seminar/Output/HitStats_konep001_ByYear_SAS.csv'
+188      ! delimiter=',' DSD DROPOVER lrecl=32767;
+189            if _n_ = 1 then        /* write column names or labels */
+190             do;
+191               put
+192                  "Year"
+193               ','
+194                  "_TYPE_"
+195               ','
+196                  "_FREQ_"
+197               ','
+198                  "AbOut_Bb"
+199               ','
+200                  "AbOut_K"
+201               ','
+202                  "AbOut_Hit"
+203               ','
+204                  "AbOut_1B"
+205               ','
+206                  "AbOut_2B"
+207               ','
+208                  "AbOut_3B"
+209               ','
+210                  "AbOut_Hr"
+211               ;
+212             end;
+213           set  HITSTATS_BYYEAR_KONEP001   end=EFIEOD;
+214               format Year best12. ;
+215               format _TYPE_ best12. ;
+216               format _FREQ_ best12. ;
+217               format AbOut_Bb best12. ;
+218               format AbOut_K best12. ;
+6                                  The SAS System   12:38 Wednesday, December 5, 2012
+
+219               format AbOut_Hit best12. ;
+220               format AbOut_1B best12. ;
+221               format AbOut_2B best12. ;
+222               format AbOut_3B best12. ;
+223               format AbOut_Hr best12. ;
+224             do;
+225               EFIOUT + 1;
+226               put Year @;
+227               put _TYPE_ @;
+228               put _FREQ_ @;
+229               put AbOut_Bb @;
+230               put AbOut_K @;
+231               put AbOut_Hit @;
+232               put AbOut_1B @;
+233               put AbOut_2B @;
+234               put AbOut_3B @;
+235               put AbOut_Hr ;
+236               ;
+237             end;
+238            if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection
+238      ! macro variable */
+239            if EFIEOD then call symputx('_EFIREC_',EFIOUT);
+240            run;
+
+NOTE: The file '/tmp/Excel_Seminar/Output/HitStats_konep001_ByYear_SAS.csv' is:
+      Filename=/tmp/Excel_Seminar/Output/HitStats_konep001_ByYear_SAS.csv,
+      Owner Name=madern,Group Name=chapin,
+      Access Permission=rw-rw----,
+      Last Modified=Wed Dec  5 12:38:43 2012
+
+NOTE: 4 records were written to the file 
+      '/tmp/Excel_Seminar/Output/HitStats_konep001_ByYear_SAS.csv'.
+      The minimum record length was 81.
+      The maximum record length was 101.
+NOTE: There were 3 observations read from the data set WORK.HITSTATS_BYYEAR_KONEP001.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+3 records created in /tmp/Excel_Seminar/Output/HitStats_konep001_ByYear_SAS.csv from 
+HITSTATS_BYYEAR_KONEP001.
+  
+  
+NOTE: "/tmp/Excel_Seminar/Output/HitStats_konep001_ByYear_SAS.csv" file was 
+      successfully created.
+NOTE: PROCEDURE EXPORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.02 seconds
+      
+
+Working on processing player: youkk001
+
+NOTE: There were 836 observations read from the data set WORK.BBDATASUBSET.
+      WHERE BatterId='youkk001';
+NOTE: The data set WORK.HITSTATS_BYYEAR_YOUKK001 has 3 observations and 10 variables.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+
+241         /**********************************************************************
+242         *   PRODUCT:   SAS
+243         *   VERSION:   9.2
+244         *   CREATOR:   External File Interface
+245         *   DATE:      05DEC12
+246         *   DESC:      Generated SAS Datastep Code
+247         *   TEMPLATE SOURCE:  (None Specified.)
+248         ***********************************************************************/
+249            data _null_;
+250            %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+251            %let _EFIREC_ = 0;     /* clear export record count macro variable */
+7                                  The SAS System   12:38 Wednesday, December 5, 2012
+
+252            file '/tmp/Excel_Seminar/Output/HitStats_youkk001_ByYear_SAS.csv'
+252      ! delimiter=',' DSD DROPOVER lrecl=32767;
+253            if _n_ = 1 then        /* write column names or labels */
+254             do;
+255               put
+256                  "Year"
+257               ','
+258                  "_TYPE_"
+259               ','
+260                  "_FREQ_"
+261               ','
+262                  "AbOut_Bb"
+263               ','
+264                  "AbOut_K"
+265               ','
+266                  "AbOut_Hit"
+267               ','
+268                  "AbOut_1B"
+269               ','
+270                  "AbOut_2B"
+271               ','
+272                  "AbOut_3B"
+273               ','
+274                  "AbOut_Hr"
+275               ;
+276             end;
+277           set  HITSTATS_BYYEAR_YOUKK001   end=EFIEOD;
+278               format Year best12. ;
+279               format _TYPE_ best12. ;
+280               format _FREQ_ best12. ;
+281               format AbOut_Bb best12. ;
+282               format AbOut_K best12. ;
+283               format AbOut_Hit best12. ;
+284               format AbOut_1B best12. ;
+285               format AbOut_2B best12. ;
+286               format AbOut_3B best12. ;
+287               format AbOut_Hr best12. ;
+288             do;
+289               EFIOUT + 1;
+290               put Year @;
+291               put _TYPE_ @;
+292               put _FREQ_ @;
+293               put AbOut_Bb @;
+294               put AbOut_K @;
+295               put AbOut_Hit @;
+296               put AbOut_1B @;
+297               put AbOut_2B @;
+298               put AbOut_3B @;
+299               put AbOut_Hr ;
+300               ;
+301             end;
+302            if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection
+302      ! macro variable */
+303            if EFIEOD then call symputx('_EFIREC_',EFIOUT);
+304            run;
+
+NOTE: The file '/tmp/Excel_Seminar/Output/HitStats_youkk001_ByYear_SAS.csv' is:
+      Filename=/tmp/Excel_Seminar/Output/HitStats_youkk001_ByYear_SAS.csv,
+      Owner Name=madern,Group Name=chapin,
+      Access Permission=rw-rw----,
+      Last Modified=Wed Dec  5 12:38:43 2012
+
+NOTE: 4 records were written to the file 
+      '/tmp/Excel_Seminar/Output/HitStats_youkk001_ByYear_SAS.csv'.
+      The minimum record length was 81.
+      The maximum record length was 101.
+NOTE: There were 3 observations read from the data set WORK.HITSTATS_BYYEAR_YOUKK001.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+3 records created in /tmp/Excel_Seminar/Output/HitStats_youkk001_ByYear_SAS.csv from 
+8                                  The SAS System   12:38 Wednesday, December 5, 2012
+
+HITSTATS_BYYEAR_YOUKK001.
+  
+  
+NOTE: "/tmp/Excel_Seminar/Output/HitStats_youkk001_ByYear_SAS.csv" file was 
+      successfully created.
+NOTE: PROCEDURE EXPORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.02 seconds
+      
+
+305        	
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           1.15 seconds
+      cpu time            1.03 seconds
+      
