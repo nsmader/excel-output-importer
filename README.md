@@ -64,8 +64,8 @@ Direct all troubles, questions, and ideas for improved functionality to Nick Mad
 
 While creating this Excel-based importer for program output was a big step up for the SAS/STATA/R -> Excel workflow to make tables, there are many other great and efficient ways to generate great-looking output and documents:
 
-* Generate LaTeX tables -- [LaTeX](http://en.wikipedia.org/wiki/LaTeX) is a free document markup language that effectively lets users write code that controls the formatting, typesetting, and contents of their documents. To have tables or figures displayed, users create references to graphics files and/or tables. To update a document, users compile their .tex code, which freshly typesets the document and updates all tables and figures based on the most recently produced versions.
+* **Generate LaTeX tables** -- [LaTeX](http://en.wikipedia.org/wiki/LaTeX) is a free document markup language that effectively lets users write code that controls the formatting, typesetting, and contents of their documents. To have tables or figures displayed, users create references to graphics files and/or tables. To update a document, users compile their .tex code, which freshly typesets the document and updates all tables and figures based on the most recently produced versions.
   * See the [estout](http://repec.org/bocode/e/estout/) package for STATA
   * See [LyX](http://www.lyx.org/) as an example of a freely available editor for LaTeX
-* [SWEAVE](http://www.stat.uni-muenchen.de/~leisch/Sweave/) is a tool for R which allows combination of all three phases of research--run analysis, generate table and figure displays, produce a formatted written report--all with one code file. A very cool, streamlined workflow.
+* **Generate reports directly with programming code using SWEAVE** -- [SWEAVE](http://www.stat.uni-muenchen.de/~leisch/Sweave/) is a tool for [R](http://www.r-project.org/) which allows combination of all three phases of research--run analysis, generate table and figure displays, produce a formatted written report--all with one code file. A very cool, streamlined workflow.
 
