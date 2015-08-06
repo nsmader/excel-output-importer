@@ -50,7 +50,7 @@ The buttons on the right are:
 
 Once the program output is imported, the user needs to use lookup functions to reference it. The file `excel-lookup-function-tutorial.xlsx` explains and gives practical examples of a wide range of Excel functions and features that help build tables and lookups.
 
-Also see the `baseball-player-comparison-example.xlsm` file in the `worked-example` folder for a practical example of how all of those formulas and functions have been used in combination. (If you want and exercise, try adding the data from the output file `HitStats_youkk001_ByYear_SAS.csv` in the `program-output` folder -- it's for Kevin Youkilis.)
+Also see the `baseball-player-comparison-example.xlsm` file in the `worked-example` folder for a practical example of how all of those formulas and functions have been used in combination. (If you want an exercise, try adding the data from the output file `HitStats_youkk001_ByYear_SAS.csv` in the `program-output` folder -- it's for Kevin Youkilis.)
 
 
 ### Some Troubleshooting
@@ -67,5 +67,5 @@ While creating this Excel-based importer for program output was a big step up fo
 * **Generate LaTeX tables** -- [LaTeX](http://en.wikipedia.org/wiki/LaTeX) is a free document markup language that effectively lets users write code that controls the formatting, typesetting, and contents of their documents. To have tables or figures displayed, users create references to graphics files and/or tables. To update a document, users compile their .tex code, which freshly typesets the document and updates all tables and figures based on the most recently produced versions.
   * See the [estout](http://repec.org/bocode/e/estout/) package for STATA
   * See [LyX](http://www.lyx.org/) as an example of a freely available editor for LaTeX
-* **Generate reports directly with programming code using SWEAVE** -- [SWEAVE](http://www.stat.uni-muenchen.de/~leisch/Sweave/) is a tool for [R](http://www.r-project.org/) which allows combination of all three phases of research--run analysis, generate table and figure displays, produce a formatted written report--all with one code file. A very cool, streamlined workflow.
+* **Generate reports directly with programming code using Knitr in R** -- [knitr](http://yihui.name/knitr/) is a tool for [R](http://www.r-project.org/) which allows combination of all three phases of research--run analysis, generate table and figure displays, produce a formatted written report--all with one code file. A very cool, streamlined workflow.
 
